@@ -1,0 +1,65 @@
+{% extends 'bookmarket/base.html' %}
+{% load static from staticfiles %}
+
+
+{% block linkscript%}
+    <link rel="stylesheet" type="text/css" href="{% static 'mine/css/show_orders.css' %}" />
+    <script type="text/javascript" charset="utf-8" src="{% static 'mine/js/show_orders.js' %}" ></script>
+{% endblock linkscript%}
+
+
+{% block base %}
+<show >
+<div id="show_orders">
+   <div id="header">
+        <a href="/mine/">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <p>返回</p></a>
+    </div>
+    <h3 class="index-title">全部订单</h3>
+    <menu>
+        <ul>
+
+            {%for order in orders%}
+
+            <span class="num2">&nbsp;{{forloop.counter}}&nbsp;</span>
+            <p>订单号:{{order.userAccount}}|{{order.token}}
+                {%for cart in order.cart_set.all%}</p>
+
+            <li>
+               <a href="#">
+                        <img src="https://{{cart.book.img}}"/>
+                        <!--商品名，图片，规格，价格-->
+                        <article class="shoppingInfo">
+                            <h6>
+                                {{cart.book.name}}
+                            </h6>
+                            <p class="detailTag"><span>精选</span><span>数量:{{cart.booknum}}</span></p>
+                            <span class="unit">{{item.specifics}}</span>
+                            <p class="price"><span class="{{forloop.parentloop.counter}}price">￥{%  widthratio cart.book.price 1 cart.booknum %}</span><s>
+                                <span>￥{%  widthratio cart.book.mprice 1 cart.booknum %}</span></s></p>
+                        </article>
+               </a>
+            </li>
+            {%endfor%}
+            <div class="check-box">
+                <p>
+
+                            <span>共计:</span>
+
+                            <span class="sumprice">
+
+
+
+                            </span>
+                        </p><a id="ok" class="check" token ="{{order.token}}">收货</a></div>
+            {%endfor%}
+
+
+        </ul>
+    </menu>
+</div>
+</show>
+
+
+{% endblock base %}

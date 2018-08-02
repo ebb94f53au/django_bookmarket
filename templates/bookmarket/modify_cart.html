@@ -1,0 +1,41 @@
+{% extends 'bookmarket/base.html' %}
+{% load static from staticfiles %}
+
+
+{% block linkscript%}
+    <link rel="stylesheet" type="text/css" href="{% static 'cart/css/modify_cart.css' %}" />
+    <script type="text/javascript" charset="utf-8" src="{% static 'cart/js/modify_cart.js' %}" ></script>
+{% endblock linkscript%}
+
+
+{% block base %}
+<div id="modify_cart">
+    <div id="header">
+        <a href="/cart/">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <p>返回</p></a>
+    </div>
+    <form class="form-horizontal" action="/modify/0/" method="post"  onsubmit="return checksubmit()">
+        {%csrf_token%}
+        <div class="input-group">
+            <span class="input-group-addon">昵称</span>
+            <input required="required" type="text" class="form-control" aria-describedby="basic-addon1" name="userName" value="{{user.userName}}">
+        </div>
+        <br/>
+        <div class="input-group">
+            <span class="input-group-addon">电话</span>
+            <input required="required" type="text" class="form-control" aria-describedby="basic-addon1" name="userPhone" value="{{user.userPhone}}">
+        </div>
+        <br/>
+        <div class="input-group">
+            <span class="input-group-addon">地址</span>
+            <input required="required" type="text" class="form-control" aria-describedby="basic-addon1" name="userAddress" value="{{user.userAdderss}}">
+        </div>
+        <br/>
+        <div class="input-group">
+            <span class="input-group-addon">修改</span>
+            <input type="submit" class="form-control" id="sub" aria-describedby="basic-addon1" value="修改">
+        </div>
+    </form>
+</div>
+{% endblock base %}

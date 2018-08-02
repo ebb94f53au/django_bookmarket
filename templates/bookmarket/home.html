@@ -1,0 +1,100 @@
+{% extends 'bookmarket/base.html' %}
+{% load static from staticfiles %}
+
+{% block linkscript %}
+ <link rel="stylesheet" type="text/css" href="{% static 'home/css/home.css'%}"/>
+ <script type="text/javascript" charset="utf-8" src="{% static 'home/js/home.js' %}"></script>
+{% endblock linkscript %}
+
+{% block base %}
+<div id="home">
+    <!--轮播-->
+    <section class="swiper-container" id="topSwiper">
+        <div class="swiper-wrapper">
+            {% for item in wheelList %}
+            <div class="swiper-slide">
+                <a href="#">
+                    <img src="{{item.img}}"/>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+        </div>
+    </section>
+    <!--导航-->
+    <section class="topMenu">
+        <nav>
+            <ul>
+                {% for item in navList %}
+
+                <li>
+
+                    <a href="{{item.url}}">
+                        <img src="{{item.img}}"/>
+                        <span>{{item.name}}</span>
+                    </a>
+                </li>
+
+                {% endfor %}
+            </ul>
+        </nav>
+
+
+
+        <menu class="swiper-container swiperMenu" id="swiperMenu">
+            <h3 class="index-title">值得购买</h3>
+            <ul class="swiper-wrapper">
+
+                {% for item in mustbuyList %}
+                <li class="swiper-slide">
+                    <a href="#">
+                    <img src="{{item.img}}" />
+                    </a>
+                </li>
+                {% endfor %}
+
+            </ul>
+        </menu>
+    </section>
+    <h3 class="index-title">畅销TOP排行</h3>
+    <section class="CVS">
+        <div class="pic_list">
+        <ul>
+            {% for item in top10_list%}
+            <li>
+            <div class="num-box">
+                <span class="num2"
+                      {%if forloop.counter == 1%}
+                      style="background:red;"
+                      {%elif forloop.counter == 2%}
+                      style="background:#e67225;"
+                      {%elif forloop.counter == 3%}
+                      style="background:#e6bf25;"
+                      {%endif%}
+                      >
+                      {%if forloop.counter == 10%}
+                    {{forloop.counter}}</span>
+                {%else%}
+                    &nbsp;{{forloop.counter}}&nbsp; </span>
+                {%endif%}
+            </div>
+            <div class="name-box">
+                <h1><a href="#">{{item.name}}</a></h1>
+            </div>
+                <i class="total">{{item.salesnums}}</i>
+            </li>
+            {%endfor%}
+        </ul>
+        <div>
+
+
+
+    </section>
+
+
+
+
+
+</div>
+{% endblock base %}
